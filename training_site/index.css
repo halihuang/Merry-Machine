@@ -1,0 +1,49 @@
+@media only screen and (min-width: 1201px) {
+    .text.adjustable {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .text.adjustable {
+        font-size: 25px;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .text.adjustable {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .text.adjustable {
+        font-size: 40px;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .text.adjustable {
+        font-size: 45px;
+    }
+}
+
+.dark.segment {
+    background-color: #111111;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 12.5%;
+    padding-right: 12.5%;
+}
+
+.light.segment {
+    background-color: #ffffff;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 12.5%;
+    padding-right: 12.5%;
+}
+
+.text.vertical {
+    writing-mode: vertical-rl;
+}

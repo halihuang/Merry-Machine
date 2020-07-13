@@ -1,0 +1,85 @@
+@media only screen and (min-width: 1201px) {
+    .text.adjustable {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .text.adjustable {
+        font-size: 25px;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .text.adjustable {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .text.adjustable {
+        font-size: 40px;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .text.adjustable {
+        font-size: 45px;
+    }
+}
+
+body {
+    overflow-y: hidden;
+}
+
+.dark.segment {
+    background-color: #111111;
+    color: #ffffff;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 12.5%;
+    padding-right: 12.5%;
+}
+
+.dark.segment.bold {
+    background-color: #111111;
+    color: #ffffff;
+    padding-top: 150px;
+    padding-bottom: 150px;
+    padding-left: 12.5%;
+    padding-right: 12.5%;
+    min-height: 100vh;
+    font-size: 75px;
+}
+
+.light.segment {
+    background-color: #ffffff;
+    color: #111111;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 12.5%;
+    padding-right: 12.5%;
+}
+
+.light.segment.bold {
+    background-color: #ffffff;
+    color: #111111;
+    padding-top: 150px;
+    padding-bottom: 150px;
+    padding-left: 12.5%;
+    padding-right: 12.5%;
+    min-height: 100vh;
+    font-size: 75px;
+}
+
+.text.vertical {
+    writing-mode: vertical-rl;
+}
+
+.fixed {
+    position: fixed;
+}
+
+.block {
+    width: 100%;
+}
