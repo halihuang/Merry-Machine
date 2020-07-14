@@ -11,11 +11,11 @@ class client_ws {
     this.client_ws.onmessage = function(data) {
       let parsed = JSON.parse(data.data).targets
       console.log('message data: ' + parsed[0])
-      console.log(parsed[0])
+      console.log(parsed)
       console.log(typeof parsed)
       if (typeof parsed === 'object') {
         setCurrentArticles(parsed)
-        setCurrentData(0)
+        setCurrentData()
       }
     };
   }
