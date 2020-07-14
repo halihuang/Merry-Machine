@@ -35,7 +35,10 @@ function setCurrentData() {
     articleData.link = articles[sourceIndex].articles[articleIndex].url
     articleData.date = articles[sourceIndex].articles[articleIndex].meta[1]
     articleData.source = articles[sourceIndex].source
-    articleData.type = 'none'
+    articleData.positive = '0'
+    articleData.negative = '0'
+    articleData.political = '0'
+    articleData.neutral = '0'
   } else {
     articleData.title = 'End of set'
     articleData.summary = 'End of set'
@@ -44,7 +47,10 @@ function setCurrentData() {
     articleData.link = 'End of set'
     articleData.date = 'End of set'
     articleData.source = 'End of set'
-    articleData.type = 'none'
+    articleData.positive = '0'
+    articleData.negative = '0'
+    articleData.political = '0'
+    articleData.neutral = '0'
     if (sourceIndex < articles.length) {
       sourceIndex++;
       articleIndex = 0;
@@ -62,7 +68,7 @@ function setCurrentData() {
 function onPositive() {
   if (articleData.title == 'End of set')
     return
-  articleData.type = 'positive'
+  articleData.positive = '1'
   intoJSON()
   articleIndex++
   setCurrentData()
@@ -71,7 +77,7 @@ function onPositive() {
 function onNegative() {
   if (articleData.title == 'End of set')
     return
-  articleData.type = 'negative'
+  articleData.negative = '1'
   intoJSON()
   articleIndex++
   setCurrentData()
@@ -80,7 +86,7 @@ function onNegative() {
 function onPolitical() {
   if (articleData.title == 'End of set')
     return
-  articleData.type = 'political'
+  articleData.political = '1'
   intoJSON()
   articleIndex++
   setCurrentData()
@@ -89,14 +95,14 @@ function onPolitical() {
 function onNeutral() {
   if (articleData.title == 'End of set')
     return
-  articleData.type = 'neutral'
+  articleData.neutral = '1'
   intoJSON()
   articleIndex++
   setCurrentData()
 }
 
 function intoJSON() {
-  console.log('article being sent off & type: ' + articleData.title + ' ' + articleData.type)
+  console.log('article being sent off & type: \n' + articleData.title + '\nPositive:' + articleData.positive + '\nNegative:' + articleData.negative + '\nPolitical:' + articleData.political + '\nNeutral:' + articleData.neutral)
   ws.sendJSON(JSON.stringify(articleData))
 }
 
