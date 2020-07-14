@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="../semantic/dist/semantic.min.css">
     <script src="../semantic/dist/semantic.min.js"></script>
 </head>
-<body width="90%">
+<body>
 
   <div class="dark segment text adjustable">
     <div class="ui large secondary inverted pointing menu">
@@ -30,57 +30,53 @@
 
   <div class="light segment text adjustable">
     <div class="ui buttons">
-      <button class="ui positive button">Positive</button>
+      <button class="ui positive button" id="positive">Positive</button>
       <div class="or"></div>
-      <button class="ui negative button">negative</button>
+      <button class="ui negative button" id="negative">negative</button>
+      <div class="or"></div>
+      <button class="ui purple button" id="political">political</button>
+      <div class="or"></div>
+      <button class="ui yellow button" id="neutral">neutral</button>
     </div>
   </div>
   
   <div class="light segment text adjustable">
     <div class="ui three column very relaxed grid">
       <div class="two wide column">
-        <p>From:</p>
-        <p class="text vertical">
-          New York Times
+        <p>Author(s):</p>
+        <p class="text vertical" id="source">
+          {[WEBSOCKET_DISCONNECTED]}
         </p>
       </div>
       <div class="nine wide column">
         <p>Title:</p>
-        <p>
-          Lorem ipsum
+        <p id="title">
+          Please connect to a local-server websocket to get article feeds for training data!
         </p>
         <p>Text:</p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec feugiat ornare ex eget iaculis. Sed tincidunt a nisl vel mollis. Sed fringilla nibh id sapien blandit efficitur. Aenean accumsan ornare enim. Etiam risus turpis, dignissim eu faucibus sed, ultricies in nisi. In hac habitasse platea dictumst. Phasellus bibendum semper tellus, vel aliquam massa facilisis eu. Vivamus rhoncus augue vel lectus auctor, eget elementum turpis porttitor. Cras dapibus pharetra accumsan. Sed consequat gravida arcu, at viverra erat volutpat quis.
-
-          Curabitur eu augue ac quam facilisis maximus in eu lacus. Suspendisse sit amet ligula ut dolor auctor eleifend in vitae dolor. Etiam ut quam ligula. Phasellus nec sollicitudin massa, eget scelerisque quam. Quisque sed placerat quam, in malesuada neque. Maecenas aliquet dui id velit bibendum, a pulvinar urna sagittis. Quisque in eleifend tellus. Donec faucibus consequat enim in lacinia. Curabitur arcu dolor, faucibus sed elit bibendum, ultricies iaculis odio. Nullam vulputate tellus odio, id faucibus diam mattis vel. Nam ac dapibus quam, a efficitur arcu. Quisque egestas lacus id mattis mollis. Fusce faucibus non odio non mattis. Nam vestibulum nisi tellus, ut ullamcorper urna rhoncus id.
-          
-          Integer tincidunt laoreet dignissim. Ut suscipit bibendum erat et interdum. Sed iaculis risus sit amet ligula cursus interdum. In vitae sapien non elit sollicitudin aliquam. Fusce accumsan id nisl ut fringilla. Etiam faucibus justo ut ex tristique, sed volutpat metus blandit. Nunc tristique a sem ut finibus. Vestibulum lacinia, turpis vehicula viverra fringilla, arcu dolor porttitor erat, quis molestie enim nisl ut lorem. Maecenas consequat elementum purus, et dapibus turpis. Phasellus in ornare tortor. Praesent vitae mi suscipit, pharetra magna quis, dignissim nisl.
-          
-          Etiam malesuada eros quis quam porta semper. Proin feugiat aliquet elit ac viverra. Vivamus quam dolor, egestas scelerisque nisi eget, fringilla congue risus. Sed scelerisque, erat ac commodo facilisis, mauris orci hendrerit lectus, vitae viverra felis risus eu risus. Sed eu eros condimentum, dictum dui eget, imperdiet velit. Curabitur efficitur iaculis fermentum. Phasellus eget ultricies nisi, vel lobortis magna. In rhoncus, enim a pharetra lobortis, elit sapien mollis ligula, sit amet imperdiet arcu lorem quis est. Praesent eu dui vel leo pellentesque imperdiet.
-          
-          Proin vel neque condimentum, iaculis odio eu, sagittis velit. Etiam consectetur augue magna, lacinia imperdiet nisl ullamcorper eu. Etiam rhoncus ligula urna, nec fermentum nunc luctus nec. Proin vel faucibus libero. Praesent id fringilla ligula. Donec eget congue elit. Suspendisse finibus et sem id suscipit. Maecenas sollicitudin iaculis iaculis. Morbi mattis dictum dolor.
+        <p id="text">
+          Install associated packages for python code in the 'training_server' folder and run 'main.py' in the command line. Websocket client and server should be on the same computer in order to connect through ws://localhost:5000/data/ws. Load 'example.json' into the 'training_server' folder that contains readable JSON training data. Reload page to execute WebSocket connection.
         </p>
       </div>
       <div class="five wide column">
         <p>Prospective Card Design:</p>
         <div class="ui card">
-          <div class="image">
+          <!-- <div class="image" id="cardImage">
             <img src="http://www.thenewatlantis.com/imgLib/20131213_NewYorkTimes_Logo.jpg">
-          </div>
+          </div> -->
           <div class="content">
-            <a href="https://www.nytimes.com/">Lorem Ipsum</a>
+            <a href="https://www.nytimes.com/" id="cardTitle" target="_blank">Lorem Ipsum</a>
             <div class="meta">
-              <span>New York Times</span>
+              <p id="cardFrom">New York Times</p>
             </div>
-            <div class="description">
+            <div class="description" id="cardSummary">
               Lorem ipsum dolor sit amet...
             </div>
           </div>
           <div class="extra content">
             <a>
               <i class="globe icon"></i>
-              <a href="https://www.nytimes.com/">nytimes.com</a>
+              <a href="https://www.nytimes.com/" id="cardLink" target="_blank">nytimes.com</a>
             </a>
           </div>
         </div>
@@ -90,6 +86,35 @@
 
 </body>
 
-<script src="semantic_modules.js"></script>
+<script src=semantic_modules.js></script>
+
+<script type="module" src=./training_injector.mjs></script>
+
+<script type="module" src=data_ws.mjs></script>
+
+<script type="module" src=websocket.mjs></script>
+
+<script type="module">
+  
+  console.log('hi')
+
+  import { onPositive, onNegative, onPolitical, onNeutral } from './training_injector.mjs'
+
+  $('#positive').click(() => {
+    onPositive();
+  });
+
+  $('#negative').click(() => {
+    onNegative();
+  });
+
+  $('#political').click(() => {
+    onPolitical();
+  });
+
+  $('#neutral').click(() => {
+    onNeutral();
+  });
+</script>
 
 </html>

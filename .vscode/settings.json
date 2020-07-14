@@ -4,4 +4,20 @@
 
   "editor.renderWhitespace": "all",
   "editor.renderControlCharacters": true,
+  "python.pythonPath": "C:\\Users\\AMAdobe\\.virtualenvs\\AMAdobe-oN4RiZHV\\Scripts\\python.exe",
+  "liveServer.settings.port": 5501,
+
+  "window.zoomLevel": 0,
+  "debug.node.autoAttach": "on",
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "liveServer.settings.donotShowInfoMsg": true,
+  "liveServer.settings.ignoreFiles": [
+
+    ".vscode/**",
+    "**/*.scss",
+    "**/*.sass",
+    "**/*.ts",
+    "**/*.json"
+  ]
 }
