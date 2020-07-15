@@ -6,6 +6,11 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
+aiohttp = "*"
+beautifulsoup4 = "*"
+websocket = "*"
+tornado = "*"
+websocket-client = "*"
 
 [requires]
 python_version = "3.6"
