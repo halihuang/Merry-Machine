@@ -6,35 +6,57 @@ let ws = new client_ws();
 
 let articles = {}
 let articleData = {}
-let index = 0
+let sourceIndex = 0
+let articleIndex = 0
 
 function setCurrentArticles(input) {
   articles = input
 }
 
-function setCurrentData(index) {
-  while (articles[index] == null) {
-    index++
+function setCurrentData() {
+  console.log('hello')
+  while (articles[sourceIndex].articles[articleIndex] == null) {
+    if (articleIndex < articles[sourceIndex].articles.length) {
+      articleIndex++
+    } else {
+      articleIndex = 0
+      sourceIndex++
+    }
   }
   console.log('article @ index: ')
-  console.log(articles[index])
+  console.log(articles[sourceIndex])
+  console.log(articles[sourceIndex].articles[articleIndex])
 
-  if (index < articles.length) {
-    articleData.title = articles[index].title
-    articleData.summary = articles[index].summary
-    articleData.text = articles[index].text
-    articleData.author = articles[index].authors
-    articleData.link = articles[index].url
-    articleData.type = 'none'
-    index = index;
+  if (articleIndex < articles[sourceIndex].articles.length) {
+    articleData.title = articles[sourceIndex].articles[articleIndex].title
+    articleData.summary = articles[sourceIndex].articles[articleIndex].summary
+    articleData.text = articles[sourceIndex].articles[articleIndex].text
+    articleData.author = articles[sourceIndex].articles[articleIndex].meta[0]
+    articleData.link = articles[sourceIndex].articles[articleIndex].url
+    articleData.date = articles[sourceIndex].articles[articleIndex].meta[1]
+    articleData.source = articles[sourceIndex].source
+    articleData.positive = '0'
+    articleData.negative = '0'
+    articleData.political = '0'
+    articleData.neutral = '0'
   } else {
     articleData.title = 'End of set'
     articleData.summary = 'End of set'
     articleData.text = 'End of set'
     articleData.author = 'End of set'
     articleData.link = 'End of set'
-    articleData.type = 'none'
-    index = index;
+    articleData.date = 'End of set'
+    articleData.source = 'End of set'
+    articleData.positive = '0'
+    articleData.negative = '0'
+    articleData.political = '0'
+    articleData.neutral = '0'
+    if (sourceIndex < articles.length) {
+      sourceIndex++;
+      articleIndex = 0;
+      setCurrentData()
+      return
+    } else {}
   }
   
   console.log('article data: ')
@@ -46,46 +68,46 @@ function setCurrentData(index) {
 function onPositive() {
   if (articleData.title == 'End of set')
     return
-  articleData.type = 'positive'
+  articleData.positive = '1'
   intoJSON()
-  index++
-  setCurrentData(index)
+  articleIndex++
+  setCurrentData()
 }
 
 function onNegative() {
   if (articleData.title == 'End of set')
     return
-  articleData.type = 'negative'
+  articleData.negative = '1'
   intoJSON()
-  index++
-  setCurrentData(index)
+  articleIndex++
+  setCurrentData()
 }
 
 function onPolitical() {
   if (articleData.title == 'End of set')
     return
-  articleData.type = 'political'
+  articleData.political = '1'
   intoJSON()
-  index++
-  setCurrentData(index)
+  articleIndex++
+  setCurrentData()
 }
 
 function onNeutral() {
   if (articleData.title == 'End of set')
     return
-  articleData.type = 'neutral'
+  articleData.neutral = '1'
   intoJSON()
-  index++
-  setCurrentData(index)
+  articleIndex++
+  setCurrentData()
 }
 
 function intoJSON() {
-  console.log('article being sent off & type: ' + articleData.title + ' ' + articleData.type)
+  console.log('article being sent off & type: \n' + articleData.title + '\nPositive:' + articleData.positive + '\nNegative:' + articleData.negative + '\nPolitical:' + articleData.political + '\nNeutral:' + articleData.neutral)
   ws.sendJSON(JSON.stringify(articleData))
 }
 
 function updateHTML() {
-  document.getElementById("source").innerHTML = articleData.author
+  document.getElementById("source").innerHTML = articleData.source + ' ' + articleData.author
   document.getElementById("title").innerHTML = articleData.title
   document.getElementById("text").innerHTML = articleData.text
 
@@ -93,6 +115,6 @@ function updateHTML() {
   document.getElementById("cardTitle").href = articleData.link
   document.getElementById("cardFrom").innerHTML = articleData.author
   document.getElementById("cardSummary").innerHTML = articleData.summary
-  document.getElementById("cardLink").innerHTML = articleData.link
+  document.getElementById("cardLink").innerHTML = articleData.source
   document.getElementById("cardLink").href = articleData.link
 }
