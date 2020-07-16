@@ -1,6 +1,6 @@
 export { setCurrentArticles, setCurrentData, onPositive, onNegative, onPolitical, onNeutral}
 
-import { client_ws } from './data_ws.mjs'
+import { client_ws } from '../websocket-js/data_ws.mjs'
 
 let ws = new client_ws();
 

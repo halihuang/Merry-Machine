@@ -1,8 +1,8 @@
 export { client_ws }
 
-import { setCurrentArticles, setCurrentData } from './training_injector.mjs'
+import { setCurrentArticles, setCurrentData } from '../training_site/training_injector.mjs'
 
-import { new_web_socket } from './websocket.mjs'
+import { new_web_socket } from '../websocket-js/websocket.mjs'
 
 class client_ws {
 

@@ -12,6 +12,9 @@ beautifulsoup4 = "*"
 websocket = "*"
 tornado = "*"
 websocket-client = "*"
+numpy = "*"
+tensorflow-datasets = "*"
+tensorflow = "*"
 
 [requires]
 python_version = "3.6"

@@ -4,7 +4,8 @@ from os.path import abspath, dirname, join
 import config
 import logging
 
-from data_ws import DataWS 
+from data_ws import DataWS
+from scraper_ws import ScraperWS
 
 logger = logging.getLogger(__name__)
 
@@ -13,6 +14,7 @@ def start():
     app = tornado.web.Application(
         handlers=[
             ("/data/ws", DataWS),
+            ("/scraper/ws", ScraperWS)
         ],
         sockets=[]
     )
