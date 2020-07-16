@@ -1,5 +1,6 @@
 from sources import ny_times
 from sources import abc_news
+from sources import washington_post
 
 class SourceList:
 
@@ -7,6 +8,8 @@ class SourceList:
                            module=ny_times)
     abc_news_source = dict(source="ABC News",
                            module=abc_news)
-    sources = [ny_times_source, abc_news_source]
+    washington_post_source = dict(source="Washington Post",
+                           module=washington_post)                      
+    sources = [ny_times_source, abc_news_source, washington_post_source]
 
 my_sources = SourceList()

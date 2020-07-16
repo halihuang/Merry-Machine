@@ -8,10 +8,10 @@ def unpack_arrs(arr):
     new_arr.extend(item)
   return new_arr
 
-def unpack_strs(arr):
+def unpack_strs(arr, sep=""):
   new_str = ""
   for item in arr:
-    new_str += clean_HTML(item)
+    new_str += clean_HTML(item) + sep
   return new_str
 
 def getText(prop):
@@ -25,6 +25,8 @@ async def soupify(url, session):
       soup = BeautifulSoup(html, 'html5lib')
       return soup
 
+def remove_nulls(arr):
+  return list(filter(lambda x: x != None, arr))
 
 def clean_HTML(html):
   if html is not None:
@@ -43,6 +45,11 @@ def clean_HTML(html):
   else:
     return ""
 
+def is_valid_article(text):
+  if text is not "" and text is not None:
+    return True
+  return False
+
 class ClientSession:
     def __init__(self, limit=100):
       connector = aiohttp.TCPConnector(limit=limit)
@@ -55,3 +62,12 @@ class ClientSession:
       await self.session.close()
 
 
+def find_all_p(article, class_=""):
+  if article is not None:
+    if class_ is "":
+      text = article.findAll('p')
+    else:
+      text = article.findAll('p', class_=class_)
+    text = unpack_strs(text)
+    return text
+  return ""

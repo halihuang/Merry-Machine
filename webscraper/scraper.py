@@ -6,7 +6,7 @@ from source_list import my_sources
 def main():
     loop = asyncio.get_event_loop()
     result = loop.run_until_complete(scrape_articles())
-    with open('articles.json', 'w') as file:
+    with open('training_server/example.json', 'w') as file:
         json.dump(result, file)
 
 async def scrape_articles():

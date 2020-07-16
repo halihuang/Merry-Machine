@@ -4,13 +4,15 @@ from utils import *
 
 session = ClientSession()
 session = session.get()
+links = []
+
 
 async def get_all_articles():
     sections = ['world', 'us', 'nyregion', 'buisness', 'technology', 'opinion', 'science', 'health', 'sports', 'arts', 'books', 'style', 'food', 'travel', 't-magazine']
-    links = await asyncio.gather(*map(get_article_links, sections))
-    links = unpack_arrs(links)
+    await asyncio.gather(*map(get_article_links, sections))
     print('obtained links')
     articles = await asyncio.gather(*map(get_article, links))
+    articles = remove_nulls(articles)
     await session.close()
     return articles
 
@@ -18,15 +20,15 @@ async def get_article_links(section):
     url = 'https://www.nytimes.com/section/' + section
     soup = await soupify(url, session)
     articles = soup.findAll('h2')
-    links = []
     for link in articles:
         if link.a is not None and link.a.has_attr("href"):
             article_link = 'https://www.nytimes.com' + link.a['href']
-            links.append(article_link)
-    return links
+            if article_link not in links:
+              links.append(article_link)
 
 
 async def get_article(link):
+  try:
     article_soup = await soupify(link, session)
     title = article_soup.find('h1', itemprop='headline')
     title = getText(title)
@@ -59,7 +61,9 @@ async def get_article(link):
         date = article_soup.find('time')
         date = getText(date)
         meta.append(date)
-
-    if text is not "":
+        
+    if is_valid_article(text):
         article = dict(url=link, title=title, summary=summary, meta=meta, text=text)
         return article
+  except:
+        print('failed to get:' + link)
