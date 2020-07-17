@@ -30,8 +30,9 @@ class ScraperWS(WebSocketHandler):
                 continue
             if(message == 'get articles'):
               print('obtaining articles')
-              positive_articles = ""
-              waiter.write_message(positive_articles)
+              with open('predictions.json') as file:
+                  positive_articles = json.load(file)
+                  waiter.write_message(json.dumps(positive_articles))
             
 
     def send_msg(self, msg):

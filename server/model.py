@@ -46,10 +46,6 @@ def predict_labels():
   print('getting data')
   # articles = get_scraped()
 
-  pos_data = []
-  neg_data = []
-  pol_data = []
-
   num_pos, num_neg, num_pol, num_tot = 0, 0, 0, 0
   with open('example.json') as file:
     articles = json.load(file)
@@ -57,45 +53,43 @@ def predict_labels():
 
     print('making predicitions')
 
+    predictions_json = []
     for source in encoded_sources:
       pos_predictions = positive_model.predict(source['encoded'])
       neg_predictions = negative_model.predict(source['encoded'])
       pol_predictions = political_model.predict(source['encoded'])
+      predictions = dict(source=source['source'], positive=[], negative=[], political=[])
 
       i = 0
-
       for article in source['articles']:
-        if (pos_predictions[i] > -1.15):
-          # put pos data into json
-          # print(article['text'])
+        if pos_predictions[i] > -1.15:
+          predictions['positive'].append(article)
           num_pos+=1
         i+=1
         num_tot+=1
 
       i = 0
-
       for article in source['articles']:
         if (neg_predictions[i] > -1.1):
-          # put neg data into json
+          predictions['negative'].append(article)
           num_neg+=1
         i+=1
 
+      i = 0
       for article in source['articles']:
         if (pol_predictions[i] > -1.1):
-          # put pol data into json
+          predictions['political'].append(article)
           num_pol+=1
         i+=1
 
-      # print(pos_predictions)
-      # print(neg_predictions)
-      # print(pol_predictions)
+      predictions_json.append(predictions)
+
+    with open('predictions.json') as outfile:
+      json.dump(predictions_json, outfile)
 
     print('made predicitions')
     print('Pos: ' + str(num_pos) + '\nNeg: ' + str(num_neg) + '\nTot: ' + str(num_tot))
-    print(pos_data)
 
-def test():
-  predict_labels()
 
 if __name__ == '__main__':
-  test()
+  predict_labels()

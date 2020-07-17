@@ -1,8 +1,8 @@
 import asyncio
 from webscraper.utils import *
 
-# session = ClientSession(40)
-# session = session.get()
+session = ClientSession(40)
+session = session.get()
 links = []
 
 async def get_all_articles():
