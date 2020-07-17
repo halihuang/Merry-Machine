@@ -5,7 +5,9 @@ import config
 import logging
 
 from data_ws import DataWS
-from scraper_ws import ScraperWS
+from positive_ws import PositiveWS
+from negative_ws import NegativeWS
+from political_ws import PoliticalWS
 
 logger = logging.getLogger(__name__)
 
@@ -14,7 +16,9 @@ def start():
     app = tornado.web.Application(
         handlers=[
             ("/data/ws", DataWS),
-            ("/scraper/ws", ScraperWS)
+            ("/positive/ws", PositiveWS),
+            ("/political/ws", PoliticalWS),
+            ("/negative/ws", NegativeWS)
         ],
         sockets=[]
     )

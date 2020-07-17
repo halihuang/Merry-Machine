@@ -84,7 +84,7 @@ def predict_labels():
 
       predictions_json.append(predictions)
 
-    with open('predictions.json') as outfile:
+    with open('predictions.json', 'w') as outfile:
       json.dump(predictions_json, outfile)
 
     print('made predicitions')

@@ -3,17 +3,16 @@ from tornado.websocket import WebSocketHandler, WebSocketClosedError
 import logging
 import string
 import json
-from webscraper import scraper
 
 logger = logging.getLogger(__name__)
 
-class ScraperWS(WebSocketHandler):
+class PositiveWS(WebSocketHandler):
     """
     """
     watchers = set()
     def open(self):
         logger.info("Scraping websocket opened")
-        ScraperWS.watchers.add(self)
+        PositiveWS.watchers.add(self)
 
     def check_origin(self, origin):
         """
@@ -25,13 +24,16 @@ class ScraperWS(WebSocketHandler):
     broadcast to clients, assumes its target data
     """
     def on_message(self, message):
-        for waiter in ScraperWS.watchers:
+        for waiter in PositiveWS.watchers:
             if waiter == self:
                 continue
             if(message == 'get articles'):
               print('obtaining articles')
               with open('predictions.json') as file:
                   positive_articles = json.load(file)
+                  for source in positive_articles:
+                    source.pop('negative')
+                    source.pop('political')
                   waiter.write_message(json.dumps(positive_articles))
             
 
@@ -43,4 +45,4 @@ class ScraperWS(WebSocketHandler):
 
     def on_close(self):
         logger.info("Data streaming websocket closed")
-        ScraperWS.watchers.remove(self)
+        PositiveWS.watchers.remove(self)

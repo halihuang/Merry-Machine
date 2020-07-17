@@ -25,7 +25,9 @@ def main():
     time.sleep(5)
 
     data_ws = create_connection("ws://localhost:5000/data/ws")
-    scraper_ws = create_connection("ws://localhost:5000/scraper/ws")
+    political_ws = create_connection("ws://localhost:5000/political/ws")
+    positive_ws = create_connection("ws://localhost:5000/positive/ws")
+    negative_ws = create_connection("ws://localhost:5000/negative/ws")
 
     # while(True):
     #   data_ws.send(json.dumps(dict(targets=json.load(open('example.json', 'rb')))))

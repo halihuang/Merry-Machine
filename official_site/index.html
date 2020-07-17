@@ -2,10 +2,11 @@
 <html>
 <head>
   <title>MerryMachine | Official Site</title>
-  <link rel="stylesheet" type="text/css" href="index.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="../semantic/dist/semantic.min.css">
   <script src="../semantic/dist/semantic.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="index.css">
+
 </head>
 <body>
 
@@ -24,29 +25,48 @@
       </div>
     </div>
   </div>
-
-  <div class="green segment bold">
-    <p>
+  <div class="green segment centered column">
+    <p class="header">Learning Positivity</p>
+    <p class="text centered column">
       Are you tired of being depressed when watching the news? 
       </br>
       </br>
-      Well, what if you could read about the good?
+      Merry Machine aggregrates news from reputable sources all across the web and
+      utilizes machine learning algorithms to identify positive news
     </p>
-    <button class="ui black basic massive button centered" onclick='window.location.href = "positive.html"'>See&nbsp;&nbsp;<span style="color:#ffffff">positive</span>&nbsp;&nbsp;news!</button>
+    <br>
+    <button class="ui light basic massive button centered " 
+      onclick='window.location.href = "positive.html"'>
+      View&nbsp;&nbsp;<span class="pink">positive</span>&nbsp;&nbsp;news!</button>
+    <br>
+    <br>
   </div>
 
-  <div class="light segment bold">
+  
+
+  <div class="ui light centered row segment green-slant">
+    <img class="pic" src="pics/example_news1.PNG">
+    <div class="centered column">
+      <p class="sub header pink-underline">Our Goal</p>
+      <p class="text text-box">Of course, we don't want to distract from the current civil rights and humanitarian events 
+        going on in the world today. However, it is important that we not only look at the negative news which the media 
+        illustrates, but to look at the strides that are being made in these areas and in other areas. Through this website, we hope
+        to remind you that amazing people and events are still out there, that we are progressing towards to a better future. If a machine
+        can identify happiness in our world, why can't we?</p></div>
+    <img class="pic" style="align-self:flex-end !important"src="pics/example_news3.PNG">
+  </div>
+
+  <div class="ui green segment centered  column light-slant">
+    <p class="sub header">Quotes from the Creators</p>
     <p>
-      "I literally thought about it scrolling through Instagram and being sad"
+      "I literally thought about it scrolling through Instagram and being sad."
       </br>
       </br>
       <p>MerryMachine Coder, Hali Huang</p>
     </p>
   </div>
 
-  <div class="dark segment bold">
-    <p>Ofcourse, we don't want to distract from the current civil rights and humanitarian events going on in the world today. However, it is important that we not only look at the negative news which the media illustrates, but to look at the strides that are being made in these areas and in other areas.</p>
-  </div>
+  
 
   <div class="ui modal">
     <i class="close icon"></i>
@@ -64,6 +84,6 @@
 </body>
 
 <script src="semantic_modules.js"></script>
-<script type="module" src="injector.js"></script>
+<script type="module" src="server.js"></script>
 
 </html>

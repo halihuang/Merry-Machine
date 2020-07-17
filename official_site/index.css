@@ -42,25 +42,73 @@ body {
   margin-right: auto;
 }
 
+.light {
+  background-color: #ffffff !important;
+  border: #ffffff;
+}
+
 .green.segment {
-  background-color: #2eb83c;
+  background-color: #69c929;
   color: #ffffff;
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 12.5%;
   padding-right: 12.5%;
+  width: 100%;
 }
 
+
+@media only screen and (min-width: 1200px){
+  .green-slant{
+    display: inline-block;
+    margin:-20px !important;
+    border: 0px !important
+  }
+  
+  
+  .green-slant:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #69c929;
+    transform: skew(85deg);
+    transform-origin:top;
+  }
+  
+  
+  .light-slant{
+    display: inline-block;
+    margin:-5px !important;
+    border: 0px !important
+  }
+  
+  .light-slant:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    transform: skew(85deg);
+    transform-origin:top;
+  }
+}
+
+
 .green.segment.bold {
-  background-color: #2eb83c;
+  background-color: #69c929;
   color: #ffffff;
   padding-top: 150px;
-  padding-bottom: 150px;
   padding-left: 12.5%;
   padding-right: 12.5%;
   min-height: 100vh;
-  font-size: 75px;
+  font-size: 60px;
 }
+
 
 .dark.segment {
   background-color: #111111;
@@ -69,6 +117,8 @@ body {
   padding-bottom: 10px;
   padding-left: 12.5%;
   padding-right: 12.5%;
+  width: 100%;
+
 }
 
 .dark.segment.bold {
@@ -85,10 +135,11 @@ body {
 .light.segment {
   background-color: #ffffff;
   color: #111111;
-  padding-top: 50px;
   padding-bottom: 50px;
   padding-left: 12.5%;
   padding-right: 12.5%;
+  width: 100%;
+
 }
 
 .light.segment.bold {
@@ -116,10 +167,59 @@ body {
 }
 
 .centered {
+  display:flex;
   align-items: center;
   justify-content: center;
 }
 
+.column {
+  flex-direction: column;
+}
+
+.row {
+  flex-direction: row;
+}
+
 .padded {
   padding: 20px;
+}
+
+.header {
+  padding-top:15vh;
+  margin-bottom: 50px;
+  font-size: 6em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.header.sub{
+  font-size: 4em
+}
+
+.text {
+  font-size: 1.5em;
+  padding-left: 15vw;
+  padding-right:15vw;
+  line-height:1.75em;
+}
+
+.text.centered{
+  text-align: center;
+}
+
+.pink {
+  color:#FE4C8C !important
+}
+
+.pink-underline {
+  text-decoration: underline solid #FE4C8C
+}
+
+.pic {
+  width:20vw;
+  height:30vh;
+  margin:0 !important;
+}
+
+.text-box {
+  padding:0 4vw 0 4vw;
 }
