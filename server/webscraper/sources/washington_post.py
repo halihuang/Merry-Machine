@@ -1,5 +1,5 @@
 import asyncio
-from utils import *
+from webscraper.utils import *
 session = ClientSession(40)
 session = session.get()
 links = []

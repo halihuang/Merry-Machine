@@ -1,10 +1,10 @@
 import asyncio
 import json
 import time
-from source_list import my_sources
 import numpy as np
 import tensorflow_datasets as tfds
 import tensorflow
+from webscraper.source_list import my_sources
 
 imdb_dataset, imdb_info = tfds.load('imdb_reviews/subwords8k', with_info=True,
                           as_supervised=True)

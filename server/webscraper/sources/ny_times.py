@@ -1,6 +1,6 @@
 
 import asyncio
-from utils import *
+from webscraper.utils import *
 
 session = ClientSession()
 session = session.get()

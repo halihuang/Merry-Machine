@@ -1,6 +1,6 @@
-from sources import ny_times
-from sources import abc_news
-from sources import washington_post
+from webscraper.sources import ny_times
+from webscraper.sources import abc_news
+from webscraper.sources import washington_post
 
 class SourceList:
 
