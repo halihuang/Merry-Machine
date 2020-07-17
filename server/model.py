@@ -9,9 +9,10 @@ imdb_dataset, imdb_info = tfds.load('imdb_reviews/subwords8k', with_info=True,
 encoder = imdb_info.features['text'].encoder
 
 def encode_text(articles):
+  print('encoding text')
   for source in articles:
     x = 0
-    encoded_arr = np.zeros((len(source['articles']), 2**14), dtype=np.float32)
+    encoded_arr = np.zeros((len(source['articles']), 2**13), dtype=np.float32)
     for article in source['articles']:
       y = 0
       if (article['title'] != None):
@@ -24,28 +25,74 @@ def encode_text(articles):
         encoded_text = (encoder.encode(' '))
       encoded_title.extend(encoded_text)
       for element in encoded_title:
-        encoded_arr[x][y] = element
+        if (y < 2**13):
+          encoded_arr[x][y] = element
         y += 1
       x += 1
     source['encoded'] = encoded_arr
+    
+  print('encoded text')
   return articles
 
 def predict_labels():
+  print('getting models')
   positive_model = tf.keras.models.load_model('saved_models/positive_model')
+  print('got positive')
   negative_model = tf.keras.models.load_model('saved_models/negative_model')
+  print('got negative')
   political_model = tf.keras.models.load_model('saved_models/political_model')
+  print('got political')
+  print('got models')
+  print('getting data')
   # articles = get_scraped()
+
+  pos_data = []
+  neg_data = []
+  pol_data = []
+
+  num_pos, num_neg, num_pol, num_tot = 0, 0, 0, 0
   with open('example.json') as file:
     articles = json.load(file)
     encoded_sources = encode_text(articles)
+
+    print('making predicitions')
+
     for source in encoded_sources:
       pos_predictions = positive_model.predict(source['encoded'])
       neg_predictions = negative_model.predict(source['encoded'])
       pol_predictions = political_model.predict(source['encoded'])
 
-      print(pos_predictions)
-      print(neg_predictions)
-      print(pol_predictions)
+      i = 0
+
+      for article in source['articles']:
+        if (pos_predictions[i] > -1.15):
+          # put pos data into json
+          # print(article['text'])
+          num_pos+=1
+        i+=1
+        num_tot+=1
+
+      i = 0
+
+      for article in source['articles']:
+        if (neg_predictions[i] > -1.1):
+          # put neg data into json
+          num_neg+=1
+        i+=1
+
+      for article in source['articles']:
+        if (pol_predictions[i] > -1.1):
+          # put pol data into json
+          num_pol+=1
+        i+=1
+
+      # print(pos_predictions)
+      # print(neg_predictions)
+      # print(pol_predictions)
+
+    print('made predicitions')
+    print('Pos: ' + str(num_pos) + '\nNeg: ' + str(num_neg) + '\nTot: ' + str(num_tot))
+    print(pos_data)
 
 def test():
   predict_labels()

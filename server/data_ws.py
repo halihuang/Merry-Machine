@@ -15,7 +15,7 @@ class DataWS(WebSocketHandler):
     watchers = set()
     def open(self):
         logger.info("Data streaming websocket opened")
-        self.write_message(json.dumps(dict(targets=json.load(open('server/example.json', 'rb')))))
+        self.write_message(json.dumps(dict(targets=json.load(open('example.json', 'rb')))))
         DataWS.watchers.add(self)
 
     def check_origin(self, origin):
