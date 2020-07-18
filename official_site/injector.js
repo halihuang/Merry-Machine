@@ -8,7 +8,7 @@ window.vue = new Vue({
   mounted(){
     this.$refs.articles.style.display = 'block'
     setTimeout( async () =>{
-      if(true){
+      if(this.sources.length == 0){
         var backup = await axios.get('../server/predictions.json')
         this.sources = backup.data
       }
