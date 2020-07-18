@@ -1,6 +1,5 @@
-import {client_ws} from "../websocket-js/positive_ws.mjs"
+import {client_ws} from "../websocket-js/scraper_ws.mjs"
 let ws = new client_ws()
-
 
 var vue = new Vue({
   el:"#news",

@@ -6,14 +6,14 @@ class client_ws {
   sources = []
 
   constructor() {
-    this.client_ws = new_web_socket('/negative/ws')
+    this.client_ws = new_web_socket('/scraper/ws')
     this.client_ws.onmessage = function(data) {
-      console.log(data.data)
       // let parsed = JSON.parse(data.data).targets
       // console.log('message data: ' + parsed[0])
       // console.log(parsed)
       // console.log(typeof parsed)
-      this.sources = data.data;
+      this.sources = JSON.parse(data.data);
+      console.log(this.sources)
     };
   }
 
