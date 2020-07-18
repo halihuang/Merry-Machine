@@ -2,11 +2,15 @@
 <html>
 <head>
   <title>MerryMachine | Positive Site</title>
-  <link rel="stylesheet" type="text/css" href="index.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="../semantic/dist/semantic.min.css">
   <script src="../semantic/dist/semantic.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="vue.min.js"></script>
+  <script src="axios.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="index.css">
+  <link rel="stylesheet" type="text/css" href="articles.css">
+
+
 
 </head>
 <body>
@@ -22,9 +26,6 @@
       <a class="item" href="negative.html">
         Negative News
       </a>
-      <a class="item" href="political.html">
-        Political News
-      </a>
       <div class="right menu">
         <a class="ui item" onclick="$('.ui.modal').modal('toggle');">
           About
@@ -35,28 +36,52 @@
 
   <div class="light segment text adjustable"></div>
 
-  <div id="news" class="light segment text adjustable" style="margin-top: 50px;">
-    <div v-if="sources.length == 0">No articles found</div>
-    <div class="ui cards centered" v-for="source in sources">
-      <p>{{source.source}}</p>
-      <div class="ui card" v-for="article in source.articles">
-        <div class="image">
-          <img src="http://www.thenewatlantis.com/imgLib/20131213_NewYorkTimes_Logo.jpg">
+  
+
+  <div ref="articles" id="news" class="light segment text adjustable articles  mt">
+    <div class="centered column ">
+      <p class="sub heading green-underline">Positive News</p>
+      <div class="ui message alert-message">
+        <div class="header">
+          Article Updates
         </div>
-        <div class="content">
-          <a href="https://www.nytimes.com/">Lorem Ipsum</a>
-          <div class="meta">
-            <span>New York Times</span>
+        <p>Due to Heroku App restrictions for free accounts, article updates are only available between 6:00 AM to 11:00 PM</p>
+      </div>
+    </div>
+    <div class="centered column" v-if="sources.length == 0">
+      <p class="sub heading ">Loading news...</p>
+      <br>
+      <img src="pics/loading.gif" class="loading">
+    </div>
+    <div v-for="source in sources">
+      <div class="centered column">    
+        <p class="sub heading pink-underline">{{source.source}}</p>
+      </div>
+      <div class="ui cards centered">
+        <br>
+        <div class="ui card article-card" v-for="article in source.positive">
+          <div class="image">     
+            <img v-if="source.source == 'NY Times'"src="pics/ny_times.jpg">
+            <img v-if="source.source == 'Washington Post'"src="pics/washington_post.png">
+            <img v-if="source.source == 'ABC News'"src="pics/abc_news.jpg">
           </div>
-          <div class="description">
-            Lorem ipsum dolor sit amet...
+          <div class="content">
+            <a v-bind:href="article.url">{{article.title}}</a>
+            <div class="meta">
+              <span>{{source.source}}</span>
+            </div>
+            <div class="description">
+              {{article.summary}}
+            </div>
           </div>
-        </div>
-        <div class="extra content">
-          <a>
-            <i class="globe icon"></i>
-            <a href="https://www.nytimes.com/">nytimes.com</a>
-          </a>
+          <div class="extra content">
+            <a>
+              <i class="globe icon"></i>
+              <a v-if="source.source == 'NY Times'" href="https://www.nytimes.com/">www.nytimes.com</a>
+              <a v-if="source.source == 'Washington Post'" href="https://www.washingtonpost.com/">www.washingtonpost.com/</a>
+              <a v-if="source.source == 'ABC News'" href="https://abcnews.go.com/">www.abcnews.go.com</a>
+            </a>
+          </div>
         </div>
       </div>
     </div>

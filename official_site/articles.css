@@ -1,0 +1,26 @@
+.article-card-summary {
+  width:30vw;
+  height:50vh;
+}
+
+.article-card {
+  width:30vw;
+  height:40vh;
+}
+
+.articles {
+  display: none;
+}
+
+.mt {
+  margin-top: -50px !important;
+}
+
+.loading {
+  height:10em;
+  width:10em;
+}
+
+.alert-message {
+
+}

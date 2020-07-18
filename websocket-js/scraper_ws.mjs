@@ -3,8 +3,6 @@ export { client_ws }
 import { new_web_socket } from './websocket.mjs'
 
 class client_ws {
-  sources = []
-
   constructor() {
     this.client_ws = new_web_socket('/scraper/ws')
     this.client_ws.onmessage = function(data) {
@@ -12,8 +10,8 @@ class client_ws {
       // console.log('message data: ' + parsed[0])
       // console.log(parsed)
       // console.log(typeof parsed)
-      this.sources = JSON.parse(data.data);
-      console.log(this.sources)
+      window.vue.sources = JSON.parse(data.data).targets;
+      console.log(window.vue.sources)
     };
   }
 
