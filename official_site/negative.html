@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>MerryMachine | Positive Site</title>
+  <title>MerryMachine | Negative Site</title>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="../semantic/dist/semantic.min.css">
   <script src="../semantic/dist/semantic.min.js"></script>
@@ -25,6 +25,9 @@
       </a>
       <a class="item" href="negative.html">
         Negative News
+      </a>
+      <a class="item" href="political.html">
+        Political News
       </a>
       <div class="right menu">
         <a class="ui item" onclick="$('.ui.modal').modal('toggle');">
@@ -70,17 +73,6 @@
             <div class="meta">
               <span>{{source.source}}</span>
             </div>
-            <div class="description">
-              {{article.summary}}
-            </div>
-          </div>
-          <div class="extra content">
-            <a>
-              <i class="globe icon"></i>
-              <a v-if="source.source == 'NY Times'" href="https://www.nytimes.com/">www.nytimes.com</a>
-              <a v-if="source.source == 'Washington Post'" href="https://www.washingtonpost.com/">www.washingtonpost.com/</a>
-              <a v-if="source.source == 'ABC News'" href="https://abcnews.go.com/">www.abcnews.go.com</a>
-            </a>
           </div>
         </div>
       </div>
@@ -93,7 +85,7 @@
       About
     </div>
     <div class="text adjustable padded">
-      MerryMachine is a news-filtering site that divides news articles from various sources into several different catagories: positive, negative, political, and neutral. Ofcourse, we don't have a human sift through all the articles; we have a machine do it! This allows for you to read the most up-to-date content from some of the top sources in the U.S. (and hopefully from other nations in upcoming updates).
+      MerryMachine is a news-filtering site that divides news articles from various sources into several different catagories: positive, negative, and political. Ofcourse, we don't have a human sift through all the articles; we have a machine do it! This allows for you to read the most up-to-date content from some of the top sources in the U.S. (and hopefully from other nations in upcoming updates).
     </div>
     <div class="text adjustable padded">
       Creators:

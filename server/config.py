@@ -1,1 +1,3 @@
-tornado_server_port="5000"
+import os
+
+tornado_server_port=os.environ.get("PORT")

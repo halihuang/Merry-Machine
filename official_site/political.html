@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MerryMachine | Political Site</title>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../semantic/dist/semantic.min.css">
+  <script src="../semantic/dist/semantic.min.js"></script>
+  <script src="vue.min.js"></script>
+  <script src="axios.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="index.css">
+  <link rel="stylesheet" type="text/css" href="articles.css">
+
+
+
+</head>
+<body>
+
+  <div class="green segment text adjustable fixed block">
+    <div class="ui large secondary inverted pointing menu">
+      <a class="item" href="index.html">
+        MerryMachine
+      </a>
+      <a class="item" href="positive.html">
+        Positive News
+      </a>
+      <a class="item" href="negative.html">
+        Negative News
+      </a>
+      <a class="item" href="political.html">
+        Political News
+      </a>
+      <div class="right menu">
+        <a class="ui item" onclick="$('.ui.modal').modal('toggle');">
+          About
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="light segment text adjustable"></div>
+
+  
+
+  <div ref="articles" id="news" class="light segment text adjustable articles  mt">
+    <div class="centered column ">
+      <p class="sub heading green-underline">Political News</p>
+      <div class="ui message alert-message">
+        <div class="header">
+          Article Updates
+        </div>
+        <p>Due to Heroku App restrictions for free accounts, article updates are only available between 6:00 AM to 11:00 PM</p>
+      </div>
+    </div>
+    <div class="centered column" v-if="sources.length == 0">
+      <p class="sub heading ">Loading news...</p>
+      <br>
+      <img src="pics/loading.gif" class="loading">
+    </div>
+    <div v-for="source in sources">
+      <div class="centered column">    
+        <p class="sub heading pink-underline">{{source.source}}</p>
+      </div>
+      <div class="ui cards centered">
+        <br>
+        <div class="ui card article-card" v-for="article in source.political">
+          <div class="image">     
+            <img v-if="source.source == 'NY Times'"src="pics/ny_times.jpg">
+            <img v-if="source.source == 'Washington Post'"src="pics/washington_post.png">
+            <img v-if="source.source == 'ABC News'"src="pics/abc_news.jpg">
+          </div>
+          <div class="content">
+            <a v-bind:href="article.url">{{article.title}}</a>
+            <div class="meta">
+              <span>{{source.source}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui modal">
+    <i class="close icon"></i>
+    <div class="header">
+      About
+    </div>
+    <div class="text adjustable padded">
+      MerryMachine is a news-filtering site that divides news articles from various sources into several different catagories: positive, negative, and political. Ofcourse, we don't have a human sift through all the articles; we have a machine do it! This allows for you to read the most up-to-date content from some of the top sources in the U.S. (and hopefully from other nations in upcoming updates).
+    </div>
+    <div class="text adjustable padded">
+      Creators:
+      Amar Maksumić & Hali Huang
+    </div>
+  </div>
+</body>
+
+<script src="semantic_modules.js"></script>
+<script type="module" src="injector.js"></script>
+
+</html>

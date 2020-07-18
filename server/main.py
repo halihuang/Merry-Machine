@@ -8,6 +8,12 @@ import logging
 import json
 import time
 import start_web
+import os
+import config
+
+# from model import predict_labels
+
+import schedule
 
 logging.basicConfig(
     level=logging.INFO,
@@ -19,16 +25,25 @@ logging.basicConfig(
 
 logger = logging.getLogger('app')
 
-
 def main():
-    
+
+    print('hello')
+
     time.sleep(5)
 
-    data_ws = create_connection("ws://localhost:5000/data/ws")
-    scraper_ws = create_connection("ws://localhost:5000/scraper/ws")
+    print(config.tornado_server_port)
+    #data_ws = create_connection("ws://merrymachine.herokuapp.com:" + config.tornado_server_port + "/data/ws")
+    #scraper_ws = create_connection("ws://merrymachine.herokuapp.com:" + config.tornado_server_port + "/scraper/ws")
 
-    # while(True):
-    #   data_ws.send(json.dumps(dict(targets=json.load(open('example.json', 'rb')))))
+    schedule.every().day.at("06:30").do(os.system('python webscraper/scraper.py'))
+    schedule.every().day.at("07:00").do(os.system('python model.py'))
+    schedule.every().day.at("11:30").do(os.system('python webscraper/scraper.py'))
+    schedule.every().day.at("12:00").do(os.system('python model.py'))
+    schedule.every().day.at("17:30").do(os.system('python webscraper/scraper.py'))
+    schedule.every().day.at("18:00").do(os.system('python model.py'))
+
+    while True:
+      schedule.run_pending()
 
 
 if __name__ == '__main__':

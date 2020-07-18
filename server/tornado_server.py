@@ -7,8 +7,11 @@ import logging
 from data_ws import DataWS
 from scraper_ws import ScraperWS
 
-
 logger = logging.getLogger(__name__)
+
+class MainHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.write("Hello")
 
 def start():
 
@@ -16,6 +19,7 @@ def start():
         handlers=[
             ("/data/ws", DataWS),
             ("/scraper/ws", ScraperWS),
+            (r"/", MainHandler)
         ],
         sockets=[]
     )

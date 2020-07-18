@@ -12,7 +12,7 @@ def encode_text(articles):
   print('encoding text')
   for source in articles:
     x = 0
-    encoded_arr = np.zeros((len(source['articles']), 2**13), dtype=np.float32)
+    encoded_arr = np.zeros((len(source['articles']), 2**11), dtype=np.float32)
     for article in source['articles']:
       y = 0
       if (article['title'] != None):
@@ -25,7 +25,7 @@ def encode_text(articles):
         encoded_text = (encoder.encode(' '))
       encoded_title.extend(encoded_text)
       for element in encoded_title:
-        if (y < 2**13):
+        if (y < 2**11):
           encoded_arr[x][y] = element
         y += 1
       x += 1
@@ -62,7 +62,7 @@ def predict_labels():
 
       i = 0
       for article in source['articles']:
-        if pos_predictions[i] > -1.15:
+        if pos_predictions[i] > -1:
           predictions['positive'].append(article)
           num_pos+=1
         i+=1
@@ -70,25 +70,25 @@ def predict_labels():
 
       i = 0
       for article in source['articles']:
-        if (neg_predictions[i] > -1.1):
+        if (neg_predictions[i] > -0.825) and source['source'] != "NY Times":
           predictions['negative'].append(article)
           num_neg+=1
         i+=1
 
       i = 0
       for article in source['articles']:
-        if (pol_predictions[i] > -1.1):
+        if (pol_predictions[i] > -1.1 and source['source'] != "NY Times"):
           predictions['political'].append(article)
           num_pol+=1
         i+=1
 
       predictions_json.append(predictions)
 
-    with open('predictions.json', 'w') as outfile:
-      json.dump(predictions_json, outfile)
+  with open('predictions.json', 'w') as outfile:
+    json.dump(predictions_json, outfile)
 
-    print('made predicitions')
-    print('Pos: ' + str(num_pos) + '\nNeg: ' + str(num_neg) + '\nTot: ' + str(num_tot))
+  print('made predicitions')
+  print('Pos: ' + str(num_pos) + '\nNeg: ' + str(num_neg) + '\nPol: ' + str(num_pol) + '\nTot: ' + str(num_tot))
 
 
 if __name__ == '__main__':

@@ -3,6 +3,7 @@ from tornado.websocket import WebSocketHandler, WebSocketClosedError
 import logging
 import string
 import json
+from webscraper import scraper
 
 logger = logging.getLogger(__name__)
 
@@ -12,6 +13,7 @@ class ScraperWS(WebSocketHandler):
     watchers = set()
     def open(self):
         logger.info("Scraping websocket opened")
+        self.write_message(json.dumps(dict(targets=json.load(open('predictions.json', 'rb')))))
         ScraperWS.watchers.add(self)
 
     def check_origin(self, origin):
