@@ -3,7 +3,7 @@ import json
 import time
 from webscraper.source_list import my_sources
 
-def create_training_json():
+def create_json():
     result = get_scraped()
     with open('./example.json', 'w') as file:
         json.dump(result, file)
@@ -33,4 +33,4 @@ def test():
         print('success')
 
 if __name__ == "__main__":
-    create_training_json()
+    create_json()

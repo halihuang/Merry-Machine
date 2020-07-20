@@ -27,21 +27,21 @@ async def get_article_links(section):
 
 
 async def get_article(link):
-  try:
-    article_soup = await soupify(link, session)
-    title = article_soup.find('h1', class_='Article__Headline__Title')
-    title = getText(title)
-    summary = article_soup.find('p', class_="Article__Headline__Desc")
-    summary = getText(summary)
-    authors = article_soup.find('div', class_="Byline__Author")
-    authors = getText(authors)
-    date = article_soup.find('div', class_='Byline__Meta--publishDate')
-    date = getText(date)
-    text = article_soup.find('article', class_="Article__Content story")
-    text = text.findAll('p')
-    text = unpack_strs(text)
-    if is_valid_article(text):
-        article = dict(url=link, title=title, summary=summary, authors=authors, date=date, text=text)
-        return article
-  except:
-        print('failed to get:' + link)
+    try:
+        article_soup = await soupify(link, session)
+        title = article_soup.find('h1', class_='Article__Headline__Title')
+        title = getText(title)
+        summary = article_soup.find('p', class_="Article__Headline__Desc")
+        summary = getText(summary)
+        authors = article_soup.find('div', class_="Byline__Author")
+        authors = getText(authors)
+        date = article_soup.find('div', class_='Byline__Meta--publishDate')
+        date = getText(date)
+        text = article_soup.find('article', class_="Article__Content story")
+        text = text.findAll('p')
+        text = unpack_strs(text)
+        if is_valid_article(text):
+            article = dict(url=link, title=title, summary=summary, authors=authors, date=date, text=text)
+            return article
+    except:
+            print('failed to get:' + link)
