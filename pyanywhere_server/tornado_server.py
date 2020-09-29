@@ -21,12 +21,13 @@ class MainHandler(tornado.web.RequestHandler):
 
 class NegModelHandler(tornado.web.RequestHandler):
     def post(self):
+        print('got neg get request')
         try:
             encoded_sources = json.loads(self.request.body)
             predictions = run_process(predict_neg_labels, encoded_sources)
             if predictions is not None:
-                requests.post("https://merrymachine.herokuapp.com/predicter", json=predictions)
-                print('sent pos post')
+                # requests.post("https://merrymachine.herokuapp.com/predicter", json=predictions)
+                print('wrote neg data')
                 self.write('success')
             else:
                 print('failure to predict')
@@ -39,10 +40,11 @@ class PosModelHandler(tornado.web.RequestHandler):
         print('got pos get request')
         try:
             encoded_sources = json.loads(self.request.body)
+            print(encoded_sources)
             predictions = run_process(predict_pos_labels, encoded_sources)
             if predictions is not None:
-                requests.post("https://merrymachine.herokuapp.com/predicter", json=predictions)
-                print('sent pos post')
+                # requests.post("https://merrymachine.herokuapp.com/predicter", json=predictions)
+                print('wrote pos data')
                 self.write('success')
             else:
                 print('failure to predict')
@@ -52,12 +54,13 @@ class PosModelHandler(tornado.web.RequestHandler):
 
 class PolModelHandler(tornado.web.RequestHandler):
     def post(self):
+        print('got pol get request')
         try:
             encoded_sources = json.loads(self.request.body)
             predictions = run_process(predict_pol_labels, encoded_sources)
             if predictions is not None:
-                requests.post("https://merrymachine.herokuapp.com/predicter", json=predictions)
-                print('sent pos post')
+                # requests.post("https://merrymachine.herokuapp.com/predicter", json=predictions)
+                print('wrote pol data')
                 self.write('success')
             else:
                 print('failure to predict')
@@ -65,12 +68,22 @@ class PolModelHandler(tornado.web.RequestHandler):
         except json.decoder.JSONDecodeError:
             print("invalid json")
 
+class DataHandler(tornado.web.RequestHandler):
+    def get(self):
+        with open('predictions.json') as file:
+          predictions = json.load(file)
+          self.set_header("Access-Control-Allow-Origin", "*")
+          self.set_header("Access-Control-Allow-Headers", "x-requested-with")
+          self.set_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+          self.write(json.dumps(predictions))
+
 application = tornado.wsgi.WSGIApplication(
     handlers=[
         (r"/", MainHandler),
         (r"/positive", PosModelHandler),
         (r"/negative", NegModelHandler),
-        (r"/political", PolModelHandler)
+        (r"/political", PolModelHandler),
+        (r"/data", DataHandler)
     ],
     sockets=[]
 )
