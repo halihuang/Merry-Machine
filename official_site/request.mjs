@@ -1,6 +1,6 @@
 export { request }
 
-const url='http://amarmaks.pythonanywhere.com/data'
+const url='https://amarmaks.pythonanywhere.com/data'
 
 
 async function request() {
